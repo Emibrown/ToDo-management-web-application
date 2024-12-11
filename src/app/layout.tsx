@@ -1,3 +1,5 @@
+import Nav from '@/components/Nav';
+import { AppBar, Button, Toolbar, Typography } from '@mui/material';
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
@@ -15,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body style={{padding: 0, margin: 0}}>
+        <Nav />
+        {children}
+      </body>
     </html>
   )
 }
