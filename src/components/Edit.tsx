@@ -1,14 +1,10 @@
 "use client";
-
 import React from 'react';
 import {
-  AppBar,
   Box,
   Button,
-  Link,
   Paper,
   TextField,
-  Toolbar,
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/system';
@@ -33,50 +29,44 @@ export default function Edit() {
   const [dueDate, setDueDate] = React.useState<Date>();
 
   return (
-    <>
-      {/* Edit Content Form */}
-      <CenteredBox>
-        <EditContentForm>
-          <Typography variant="h5" gutterBottom>
-            Edit Task
-          </Typography>
-
-          <TextField
-            label="To-Do Task Content"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            required
-          />
-
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Box sx={{ display: 'flex', width: '100%', marginTop: 3 }}>
-              <DatePicker
-                label="Due Date"
-              />
-            </Box>
-          </LocalizationProvider>
-
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginTop: 5, gap: 2 }}>
-            <Button
-              variant="outlined"
-              color="secondary"
-              href="/"
-              fullWidth
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{ marginRight: 1 }}
-              fullWidth
-            >
-              Save
-            </Button>
+    <CenteredBox>
+      <EditContentForm>
+        <Typography variant="h5" gutterBottom>
+          Edit Task
+        </Typography>
+        <TextField
+          label="To-Do Task Content"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          required
+        />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <Box sx={{ display: 'flex', width: '100%', marginTop: 3 }}>
+            <DatePicker
+              label="Due Date"
+            />
           </Box>
-        </EditContentForm>
-      </CenteredBox>
-    </>
+        </LocalizationProvider>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginTop: 5, gap: 2 }}>
+          <Button
+            variant="outlined"
+            color="secondary"
+            href="/"
+            fullWidth
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ marginRight: 1 }}
+            fullWidth
+          >
+            Save
+          </Button>
+        </Box>
+      </EditContentForm>
+    </CenteredBox>
   );
 }

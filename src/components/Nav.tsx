@@ -1,4 +1,5 @@
 "use client";
+import { useAuth } from '@/context/AuthContext';
 import {
   AppBar,
   Button,
@@ -9,6 +10,7 @@ import {
 import { useRouter } from 'next/navigation';
 
 export default function Nav() {
+  const {csrfToken, logout} = useAuth()
   const router = useRouter()
 
   return (
@@ -19,8 +21,15 @@ export default function Nav() {
             Todo management app
           </Link>
         </Typography>
-        <Button onClick={() => router.push('/login')} color="inherit" sx={{fontSize: {xs: '12px', md: '14px'}}}>Sign In</Button>
-        <Button color="inherit" sx={{fontSize: {xs: '12px', md: '14px'}}}>Sign Up</Button>
+        {
+          csrfToken ? <Button onClick={logout} color="inherit" sx={{fontSize: {xs: '12px', md: '14px'}}}>Logout</Button>
+          : (
+            <>
+              <Button onClick={() => router.push('/signin')} color="inherit" sx={{fontSize: {xs: '12px', md: '14px'}}}>Sign In</Button>
+              <Button onClick={() => router.push('/signup')} color="inherit" sx={{fontSize: {xs: '12px', md: '14px'}}}>Sign Up</Button>
+            </>
+          )
+        }
       </Toolbar>
     </AppBar>
   );

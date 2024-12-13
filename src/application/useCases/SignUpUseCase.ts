@@ -1,7 +1,7 @@
-import { IUserRepository } from "../../domain/repositories/IUserRepository";
-import { User } from "../../domain/entities/User";
 import { v4 as uuidv4 } from 'uuid';
-import { hashPassword } from "../../infrastructure/auth/bcrypt";
+import { hashPassword } from "@/infrastructure/auth/bcrypt";
+import { User } from "@/domain/entities/User";
+import { IUserRepository } from '@/domain/repositories/IUserRepository';
 
 export class SignUpUseCase {
   constructor(private userRepo: IUserRepository) {}
