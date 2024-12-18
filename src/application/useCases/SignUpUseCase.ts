@@ -7,7 +7,8 @@ export class SignUpUseCase {
   constructor(private userRepo: IUserRepository) {}
 
   async execute(username: string, password: string): Promise<User> {
-    const existing = await this.userRepo.findByUsername(username);
+    const normalizedUsername = username.toLowerCase().trim();
+    const existing = await this.userRepo.findByUsername(normalizedUsername);
     if (existing) {
       throw new Error('Username already taken');
     }
@@ -15,7 +16,7 @@ export class SignUpUseCase {
     const passwordHash = await hashPassword(password);
     const newUser: User = {
       id: uuidv4(),
-      username,
+      username: normalizedUsername,
       passwordHash,
       createdAt: new Date(),
     };

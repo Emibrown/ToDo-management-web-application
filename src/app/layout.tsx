@@ -1,6 +1,7 @@
 import { GetTodosUseCase } from '@/application/useCases/GetTodosUseCase';
 import Nav from '@/components/Nav';
 import { AuthProvider } from '@/context/AuthContext';
+import { SnackbarProvider } from '@/context/SnackbarContext';
 import { TodoProvider } from '@/context/TodoContext';
 import { Todo } from '@/domain/entities/Todo';
 import { getSession } from '@/infrastructure/auth/session';
@@ -33,12 +34,14 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body style={{padding: 0, margin: 0}}>
-        <AuthProvider initialCsrfToken={csrfToken}>
-          <TodoProvider initialTodos={todos}>
-            <Nav />
-            {children}
-          </TodoProvider>
-        </AuthProvider>
+        <SnackbarProvider>
+          <AuthProvider initialCsrfToken={csrfToken}>
+            <TodoProvider initialTodos={todos}>
+              <Nav />
+              {children}
+            </TodoProvider>
+          </AuthProvider>
+        </SnackbarProvider>
       </body>
     </html>
   )

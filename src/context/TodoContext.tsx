@@ -1,6 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { Todo } from '../domain/entities/Todo';
+import { useSnackbar } from './SnackbarContext';
 
 interface TodoContextValue {
   todos: Todo[];
@@ -18,6 +19,7 @@ interface TodoProviderProps {
 
 export const TodoProvider: React.FC<TodoProviderProps> = ({ initialTodos, children }) => {
   const [todos, setTodos] = useState<Todo[]>(initialTodos);
+  const {showSnackbar} = useSnackbar()
 
   const addTodo = async (content: string, dueDate: string) => {
     const csrfToken = localStorage.getItem('csrfToken') || '';
@@ -32,6 +34,7 @@ export const TodoProvider: React.FC<TodoProviderProps> = ({ initialTodos, childr
     if (res.ok) {
       const newTodo: Todo = await res.json();
       setTodos(prev => [...prev, newTodo]);
+      showSnackbar('Todo added successfully!', 'success')
     } else {
       const data = await res.json();
       alert(data.error);
@@ -51,6 +54,7 @@ export const TodoProvider: React.FC<TodoProviderProps> = ({ initialTodos, childr
     if (res.ok) {
       const newTodo: Todo = await res.json();
       setTodos(prev => prev.map(t => t.id === newTodo.id ? newTodo : t));
+      showSnackbar('Todo updated successfully!', 'info')
     } else {
       const data = await res.json();
       alert(data.error);
@@ -69,6 +73,7 @@ export const TodoProvider: React.FC<TodoProviderProps> = ({ initialTodos, childr
     });
     if (res.ok) {
       setTodos(prev => prev.filter(t => t.id !== id));
+      showSnackbar('Todo deleted successfully!', 'error');
     } else {
       const data = await res.json();
       alert(data.error);

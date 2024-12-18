@@ -1,5 +1,6 @@
 "use client";
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { useSnackbar } from './SnackbarContext';
 
 interface AuthContextValue {
   csrfToken: string | null;

@@ -6,7 +6,8 @@ export class SignInUseCase {
   constructor(private userRepo: IUserRepository) {}
 
   async execute(username: string, password: string): Promise<User> {
-    const user = await this.userRepo.findByUsername(username);
+    const normalizedUsername = username.toLowerCase().trim();
+    const user = await this.userRepo.findByUsername(normalizedUsername);
     if (!user) {
       throw new Error('Invalid credentials');
     }
