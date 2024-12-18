@@ -9,6 +9,8 @@ interface Session {
   csrfToken: string;
 }
 
+const isProd = process.env.NODE_ENV === 'production';
+
 // Load sessions from file
 async function loadSessions(): Promise<Record<string, Session>> {
   try {
@@ -62,7 +64,7 @@ export async function getUserFromRequest(req: NextRequest): Promise<Session | nu
 export function setSessionCookie(response: NextResponse, sessionId: string) {
   response.cookies.set('sessionId', sessionId, {
     httpOnly: true,
-    secure: true, 
+    secure: isProd, 
     sameSite: 'strict',
     path: '/'
   });
@@ -72,7 +74,7 @@ export function setSessionCookie(response: NextResponse, sessionId: string) {
 export function clearSessionCookie(response: NextResponse) {
   response.cookies.set('sessionId', '', {
     httpOnly: true,
-    secure: true,
+    secure: isProd,
     sameSite: 'strict',
     path: '/',
     maxAge: 0

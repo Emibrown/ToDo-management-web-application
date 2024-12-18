@@ -1,52 +1,38 @@
 "use client";
 import { useState } from 'react';
 import {
-  AppBar,
+  Box,
   Button,
   Container,
-  IconButton,
-  InputBase,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Paper,
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/system';
-import { CheckCircle, Edit, Delete, Circle } from '@mui/icons-material';
-import { useRouter } from 'next/navigation';
+import { useTodos } from '@/context/TodoContext';
+import NewTodoModal from './NewTodoModal';
+import TodoList from './TodoList';
 
-// Styled components
-const Header = styled(Container)(({ theme }) => ({
+const Header = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: theme.spacing(1.5),
   marginTop: theme.spacing(4),
-  marginBottom: theme.spacing(4),
+  marginBottom: theme.spacing(2),
 }));
 
-// Main Component
 export default function Landing() {
-  const [todos, setTodos] = useState<string[]>([]);
-  const [newTodo, setNewTodo] = useState<string>('');
-  const router = useRouter()
+  const { addTodo } = useTodos();
+  const [openModal, setOpenModal] = useState(false);
 
-  const handleAddTodo = () => {
-    if (newTodo.trim() !== '') {
-      setTodos([...todos, newTodo.trim()]);
-      setNewTodo('');
-    }
-  };
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
 
-  const handleDeleteTodo = (index: number) => {
-    setTodos(todos.filter((_, i) => i !== index));
+  const handleCreateTodo = async (newTodo: { content: string; dueDate?: string }) => {
+    await addTodo(newTodo.content, newTodo.dueDate || '');
+    setOpenModal(false)
   };
 
   return (
     <Container>
-      {/* Input Box */}
       <Header>
         <Typography variant="h5" gutterBottom>
           Todo list
@@ -54,29 +40,13 @@ export default function Landing() {
         <Button
           variant="contained"
           color="info"
-          onClick={handleAddTodo}
-          sx={{ marginLeft: 2 }}
+          onClick={handleOpenModal}
         >
           New Todo
         </Button>
       </Header>
-      {/* Todo List */}
-      <List>
-        {todos.map((todo, index) => (
-          <ListItem key={index} disableGutters>
-            <ListItemIcon>
-              <CheckCircle color="info" />
-            </ListItemIcon>
-            <ListItemText primary={todo} />
-            <IconButton onClick={() => router.push("/edit") } color="info" edge="end" sx={{ marginRight: 1 }}>
-              <Edit />
-            </IconButton>
-            <IconButton edge="end" onClick={() => handleDeleteTodo(index)}>
-              <Delete />
-            </IconButton>
-          </ListItem>
-        ))}
-      </List>
+      <TodoList />
+      <NewTodoModal open={openModal} onClose={handleCloseModal} onCreate={handleCreateTodo} />
     </Container>
   );
 }

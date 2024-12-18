@@ -2,14 +2,17 @@
 import React from 'react';
 import {
   Box,
-  Button,
   Paper,
-  TextField,
-  Typography,
 } from '@mui/material';
 import { styled } from '@mui/system';
-import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import TodoForm from './TodoForm';
+import { Todo } from '@/domain/entities/Todo';
+import { useTodos } from '@/context/TodoContext';
+import { useRouter } from 'next/navigation';
+
+interface EditProps {
+  todo: Todo 
+}
 
 const CenteredBox = styled(Box)({
   display: 'flex',
@@ -19,54 +22,39 @@ const CenteredBox = styled(Box)({
 
 const EditContentForm = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(4),
-  width: '400px',
-  display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
 }));
 
-export default function Edit() {
-  const [dueDate, setDueDate] = React.useState<Date>();
+const Edit: React.FC<EditProps> = ({todo}) => {
+  const {updateTodo} = useTodos()
+  const router = useRouter();
+
+  const handleUpdateTodo = async (updatedTodo: { content: string; dueDate?: string | null }) => {
+    await updateTodo({
+      ...todo,
+      content: updatedTodo.content,
+      dueDate: updatedTodo.dueDate ? new Date(updatedTodo.dueDate) : undefined,
+    });
+    router.refresh();
+    router.push('/');
+  };
+
+  const handleCancel = () => {
+    router.push('/');
+  };
 
   return (
     <CenteredBox>
-      <EditContentForm>
-        <Typography variant="h5" gutterBottom>
-          Edit Task
-        </Typography>
-        <TextField
-          label="To-Do Task Content"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          required
-        />
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Box sx={{ display: 'flex', width: '100%', marginTop: 3 }}>
-            <DatePicker
-              label="Due Date"
-            />
-          </Box>
-        </LocalizationProvider>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginTop: 5, gap: 2 }}>
-          <Button
-            variant="outlined"
-            color="secondary"
-            href="/"
-            fullWidth
-          >
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ marginRight: 1 }}
-            fullWidth
-          >
-            Save
-          </Button>
-        </Box>
+      <EditContentForm
+        sx={{
+          width: { xs: '80%', sm: '70%', md: '50%', lg: '40%' },
+        }}
+      >
+        <TodoForm initialData={{content: todo?.content, dueDate: todo.dueDate ? todo.dueDate.toISOString().split('T')[0] : ''}} onSubmit={handleUpdateTodo} onCancel={handleCancel} isEditing />
       </EditContentForm>
     </CenteredBox>
   );
 }
+
+export default Edit;

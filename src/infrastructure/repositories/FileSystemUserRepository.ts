@@ -6,11 +6,9 @@ import { DATA_PATH_USERS } from '../config';
 export class FileSystemUserRepository implements IUserRepository {
   private async readData(): Promise<User[]> {
     try {
-      console.log("file")
       const data = await fs.readFile(DATA_PATH_USERS, 'utf-8');
-      return JSON.parse(data).map((u: any) => ({ ...u, createdAt: new Date(u.createdAt) }));
+      return JSON.parse(data).map((u: User) => ({ ...u, createdAt: new Date(u.createdAt) }));
     } catch(e) {
-      console.log("file", e)
       return [];
     }
   }

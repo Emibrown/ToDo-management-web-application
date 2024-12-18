@@ -7,9 +7,9 @@ export class FileSystemTodoRepository implements ITodoRepository {
   private async readData(): Promise<Todo[]> {
     try {
       const data = await fs.readFile(DATA_PATH, 'utf-8');
-      return JSON.parse(data).map((t: any) => ({
+      return JSON.parse(data).map((t: Todo) => ({
         ...t,
-        dueDate: new Date(t.dueDate),
+        dueDate: t.dueDate ? new Date(t.dueDate) : undefined,
         createdAt: new Date(t.createdAt)
       }));
     } catch (err) {

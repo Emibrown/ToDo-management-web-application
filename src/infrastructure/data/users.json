@@ -4,5 +4,17 @@
     "username": "Emibrown",
     "passwordHash": "$2b$10$HJFKLrLoQcUGhGNtrNp7HeK5nYTsgWU.SNGh5BGRSoxGt5.r0TrMq",
     "createdAt": "2024-12-13T08:29:36.757Z"
+  },
+  {
+    "id": "17b6a3f4-2b4a-4b33-aa85-57e69a2e5d05",
+    "username": "emibrown",
+    "passwordHash": "$2b$10$tXthQG2SI8aE2l2lElY1ceVQ9SB.J6d.Bdtb9jbcKIEJZN2.ZO7LK",
+    "createdAt": "2024-12-18T17:07:14.683Z"
+  },
+  {
+    "id": "e3e67b39-0f7e-43db-9083-627894681e2b",
+    "username": "Emil",
+    "passwordHash": "$2b$10$OqxvIFzO5ASuyzQLtPHkF.LX5WIXt8ucR4dGkVyOIruBlhdadWZJ2",
+    "createdAt": "2024-12-18T17:12:10.340Z"
   }
 ]

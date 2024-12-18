@@ -57,8 +57,12 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
       } else {
         login(data.csrfToken);
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unknown error occurred');
+      }
     } finally {
       setLoading(false);
     }
@@ -76,8 +80,12 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
         throw new Error(data.error || 'Automatic login failed');
       }
       login(data.csrfToken);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unknown error occurred');
+      }
     }
   };
 

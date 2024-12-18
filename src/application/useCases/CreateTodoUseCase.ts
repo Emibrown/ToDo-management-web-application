@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 export class CreateTodoUseCase {
   constructor(private todoRepo: ITodoRepository) {}
 
-  async execute(userId: string, content: string, dueDate: Date): Promise<Todo> {
+  async execute(userId: string, content: string, dueDate?: Date): Promise<Todo> {
     const newTodo: Todo = {
       id: uuidv4(),
       userId,

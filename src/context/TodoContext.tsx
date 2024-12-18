@@ -49,7 +49,8 @@ export const TodoProvider: React.FC<TodoProviderProps> = ({ initialTodos, childr
       body: JSON.stringify(updatedTodo)
     });
     if (res.ok) {
-      setTodos(prev => prev.map(t => t.id === updatedTodo.id ? updatedTodo : t));
+      const newTodo: Todo = await res.json();
+      setTodos(prev => prev.map(t => t.id === newTodo.id ? newTodo : t));
     } else {
       const data = await res.json();
       alert(data.error);
