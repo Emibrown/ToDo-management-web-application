@@ -1,10 +1,6 @@
 {
-  "91212e2c6ac139bcebd2709e244d342d": {
+  "73eecb4b55c7e317681a280c365d5611": {
     "userId": "ed849823-bc07-43d8-8a90-74911a8a8f77",
-    "csrfToken": "0c68cece0539940997257cf1e2edb8bb"
-  },
-  "e346bf5bbc00ce56d39ca12ab8a79b92": {
-    "userId": "f1c46e0e-c787-47e5-83ef-6cdd0ff58a5f",
-    "csrfToken": "000cbc26eaf269c76c1b4103853d0d5c"
+    "csrfToken": "47f3b09247f87ac83ae369b23e2f833d"
   }
 }

@@ -67,7 +67,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ initialData, onSubmit, onCancel, is
 
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <DatePicker
-          label="Due Date"
+          label="Due Date (Optional)"
           value={dueDate ? moment(dueDate, 'YYYY-MM-DD') : undefined}
           onChange={(newValue) => setDueDate(moment(newValue).format("YYYY-MM-DD"))}
         />

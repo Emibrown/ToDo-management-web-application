@@ -19,7 +19,11 @@ export async function POST(req: NextRequest) {
     const res = NextResponse.json({ message: 'Signed in', csrfToken });
     setSessionCookie(res, sessionId);
     return res;
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 401 });
+  } catch (err) {
+    if (err instanceof Error) {
+      return NextResponse.json({ error: err.message }, { status: 401 });
+    } else {
+      return NextResponse.json({ error: 'An unknown error occurred' }, { status: 401 });
+    }
   }
 }

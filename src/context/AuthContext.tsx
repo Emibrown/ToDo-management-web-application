@@ -1,6 +1,5 @@
 "use client";
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { useSnackbar } from './SnackbarContext';
 
 interface AuthContextValue {
   csrfToken: string | null;
@@ -16,11 +15,10 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ initialCsrfToken, children }) => {
-  const [csrfToken, setCsrfToken] = useState<string | null>(initialCsrfToken);
+  const [csrfToken, _setCsrfToken] = useState<string | null>(initialCsrfToken);
 
   const login = async (token: string) => {
     localStorage.setItem('csrfToken', token);
-    setCsrfToken(token)
     window.location.href = '/';
   };
 
@@ -31,7 +29,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ initialCsrfToken, ch
     });
     if (res.ok) {
       localStorage.removeItem('csrfToken');
-      setCsrfToken(null)
       window.location.href = '/signin';
     } else {
       const data = await res.json();

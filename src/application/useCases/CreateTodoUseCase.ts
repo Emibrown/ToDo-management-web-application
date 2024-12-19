@@ -1,5 +1,5 @@
-import { ITodoRepository } from "../../domain/repositories/ITodoRepository";
-import { Todo } from "../../domain/entities/Todo";
+import { Todo } from '@/domain/entities/Todo';
+import { ITodoRepository } from '@/domain/repositories/ITodoRepository';
 import { v4 as uuidv4 } from 'uuid';
 
 export class CreateTodoUseCase {

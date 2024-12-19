@@ -1,6 +1,6 @@
-import { IUserRepository } from "../../domain/repositories/IUserRepository";
-import { verifyPassword } from "../../infrastructure/auth/bcrypt";
-import { User } from "../../domain/entities/User";
+import { User } from "@/domain/entities/User";
+import { IUserRepository } from "@/domain/repositories/IUserRepository";
+import { verifyPassword } from "@/infrastructure/auth/bcrypt";
 
 export class SignInUseCase {
   constructor(private userRepo: IUserRepository) {}

@@ -1,7 +1,7 @@
-import { ITodoRepository } from "../../domain/repositories/ITodoRepository";
 import fs from 'fs/promises';
 import { DATA_PATH } from "../config";
 import { Todo } from "@/domain/entities/Todo";
+import { ITodoRepository } from '@/domain/repositories/ITodoRepository';
 
 export class FileSystemTodoRepository implements ITodoRepository {
   private async readData(): Promise<Todo[]> {
