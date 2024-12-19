@@ -1,0 +1,14 @@
+[
+  {
+    "id": "ed849823-bc07-43d8-8a90-74911a8a8f77",
+    "username": "emibrown",
+    "passwordHash": "$2b$10$KQtUzmNBrxjovz4cLVCsfu1rIGg4lVfSRkRQrCIjkOkRILmFaGwXi",
+    "createdAt": "2024-12-18T23:44:34.025Z"
+  },
+  {
+    "id": "f1c46e0e-c787-47e5-83ef-6cdd0ff58a5f",
+    "username": "emibrown22",
+    "passwordHash": "$2b$10$qie0y7NuxLypsuDbfnr.TeYIZGYAzMvQT8.80Aw7dADZnNXp3PZcW",
+    "createdAt": "2024-12-18T23:46:26.824Z"
+  }
+]

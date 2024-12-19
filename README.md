@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## ToDo Management Application
+This is a Next.js 13 ToDo Management Application with TypeScript, Material UI, Docker support, and a simple file based storage system. The app includes features for signing up, signing in, creating, editing, and deleting todos.
 
 ## Getting Started
+Follow these instructions to get the application up and running.
 
-First, run the development server:
+Prerequisites
+- Node.js (version 18 or higher)
+- Docker and Docker Compose (optional for containerized deployment)
 
+## Running Normally
+
+Install dependencies:
+```bash
+npm install
+```
+Create a .env file in the root directory with the following variables:
+```bash
+NODE_ENV=development
+PORT=3000
+```
+Run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+Open the app:
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Running with Docker
+Create a .env file in the root directory with the following variables:
+```bash
+NODE_ENV=development
+PORT=3000
+```
+Build the Docker image and start the container:
+```bash
+docker-compose up --build
+```
+Visit [http://localhost:3000](http://localhost:3000) to view the app.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Stop the container:
+```bash
+docker-compose down
+```
 
-## Learn More
+## Directory Structure
 
-To learn more about Next.js, take a look at the following resources:
+This project follows the Domain Driven Design (DDD) principles. Here's a breakdown of the project structure:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- ## app/ – Presentation Layer (Next.js Pages and API Routes)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+The app directory contains the Next.js App Router, pages, and API routes. This is where the user interface and server-side logic are defined.
 
-## Deploy on Vercel
+- ## components/ – Reusable UI Components
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The components directory contains reusable React components that are shared across different pages.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- ## context/ – State Management
+
+The context directory contains React Context Providers to manage global state, such as user auth, todo lists and notifications.
+
+- ## domain/ – Domain Layer (Business Logic and Entities)
+
+The domain directory represents the core business logic and entities of the application. It defines the essential concepts and rules of the domain.
+
+- ## application/ – Application Layer (Use Cases)
+
+The application directory contains Use Cases that represent application specific business logic. These use cases orchestrate operations on the domain entities.
+
+- ## infrastructure/ – Infrastructure Layer (Data Access and Utilities)
+
+The infrastructure directory contains implementation details for data storage, authentication, and other infrastructure-related concerns.
